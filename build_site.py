@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""金银全景图 · GitHub Actions 构建脚本（v2：保留新闻流与快照索引）
+"""贵金属全景图 · GitHub Actions 构建脚本（v3：品牌更名适配）
 从 kimi.link 拉取的 base.html（自包含单文件，含内嵌 echarts + 旧数据），
 把其中的数据块整体替换为：SNAP_INDEX + BOARD_NEWS（rawdata/news.json）+ 新 data/dashboard.js。
 """
@@ -27,6 +27,6 @@ block = ("window.SNAP_INDEX = " + snap_idx + ";\n"
          "window.BOARD_NEWS = " + news_js + ";\n" + dj)
 out = base[:s] + "<script>\n" + block + "\n" + base[e:]
 
-assert "<title>金银全景图" in out, "标题断言失败"
+assert "<title>贵金属全景图" in out, "标题断言失败"
 open("index.html", "w", encoding="utf-8").write(out)
 print("index.html written,", len(out), "bytes")
