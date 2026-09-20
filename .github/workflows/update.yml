@@ -1,9 +1,9 @@
-name: 金银全景图自动更新
+name: 贵金属全景图自动更新
 on:
   schedule:
-    - cron: '30 22 * * *'
-    - cron: '45 7 * * 1-5'
-  workflow_dispatch:
+    - cron: '30 22 * * *'      # 每天 06:30 北京时间 = 22:30 UTC
+    - cron: '45 7 * * 1-5'     # 工作日 15:45 北京时间 = 07:45 UTC
+  workflow_dispatch:           # 网页上点 Run workflow 即可手动更新
 permissions:
   contents: write
 jobs:
@@ -19,10 +19,10 @@ jobs:
       - name: 拉取基线
         run: |
           set -e
-          curl -fsL "https://goldsilver-panorama.ok.kimi.link" -o base.html
+          curl -fsL "https://premetal-panorama.ok.kimi.link" -o base.html
           grep -q "window.DASHBOARD_DATA=" base.html
-          curl -fsL "https://goldsilver-panorama.ok.kimi.link/rawdata.zip" -o rawdata.zip
-          curl -fsL "https://goldsilver-panorama.ok.kimi.link/pipeline.zip" -o pipeline.zip
+          curl -fsL "https://premetal-panorama.ok.kimi.link/rawdata.zip" -o rawdata.zip
+          curl -fsL "https://premetal-panorama.ok.kimi.link/pipeline.zip" -o pipeline.zip
           mkdir -p rawdata data pipeline
           unzip -qo rawdata.zip -d rawdata
           unzip -qo pipeline.zip -d pipeline
